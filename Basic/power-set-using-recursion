@@ -1,0 +1,17 @@
+class Solution:
+    def powerSet(self, s):
+        ans = []
+
+        def solve(i, current):
+            if i == len(s):
+                ans.append(current)
+                return
+
+            # Don't include s[i]
+            solve(i + 1, current)
+
+            # Include s[i]
+            solve(i + 1, current + s[i])
+
+        solve(0, "")
+        return ans
