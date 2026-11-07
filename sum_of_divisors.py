@@ -7,3 +7,4 @@ class Solution:
             total += i * (n // i)
 
         return total
+#Use print statments 
