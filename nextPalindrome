@@ -1,0 +1,40 @@
+
+class Solution:
+    def nextPalindrome(self, arr):
+        n = len(arr)
+        result = arr[:]
+
+        left = (n - 1) // 2
+        right = n // 2
+
+        # Mirror the left half to the right half
+        while left >= 0:
+            result[right] = result[left]
+            left -= 1
+            right += 1
+
+        # Check whether the palindrome is greater
+        if result > arr:
+            return result
+
+        # Increment the middle and handle carry
+        left = (n - 1) // 2
+        right = n // 2
+
+        carry = 1
+
+        while left >= 0 and carry:
+            result[left] += carry
+            carry = result[left] // 10
+            result[left] %= 10
+
+            result[right] = result[left]
+
+            left -= 1
+            right += 1
+
+        # If carry remains, increase the number of digits
+        if carry:
+            return [1] + [0] * (n - 1) + [1]
+
+        return result
